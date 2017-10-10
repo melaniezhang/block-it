@@ -2,7 +2,7 @@
 // add multiple filters
 // add block image, extension figures out what you want to filter
 
-var filter = "rabbit";
+var filter = ["spider", "arachnid"];
 
 window.onload = function(){
   $("img").each(function() {
@@ -14,7 +14,7 @@ window.onload = function(){
         "image": {},
         "features": [{
           "type": "LABEL_DETECTION",
-          "maxResults": 3
+          "maxResults": 5
         }]
       }]
     };
@@ -35,8 +35,8 @@ window.onload = function(){
       success: function(data) {
                       console.log("image src is " + curr_img.src)
                       console.log("response is " + data)
-                      for (var j = 0; j < 3; j++) {
-                        if (data['responses'][0]['labelAnnotations'][j]['description'] == filter) { //figure out path here
+                      for (var j = 0; j < 5; j++) {
+                        if (filter.indexOf(data['responses'][0]['labelAnnotations'][j]['description']) > -1) { //figure out path here
                           $(curr_img).attr('src', 'http://jera.com/sandbox/Super_Simple_AR_Target.png');
                         }
                       }
